@@ -14,6 +14,7 @@ def testChangeRGB():
     img = cv2.imread("image_work1/image_new.jpg")
     # 获取输出的检测图片
     cv2.imshow('ImgOld', imgold)
+
     cv2.imshow('SmileNew', img)
     c = cv2.waitKey(0)  # 按任意键继续
 
@@ -28,3 +29,4 @@ def testScal():
     im_resized.show()
 
 testChangeRGB()
+testScal()
