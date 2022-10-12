@@ -28,3 +28,4 @@ def testScal():
     im_resized.show()
 
 testChangeRGB()
+testScal()
