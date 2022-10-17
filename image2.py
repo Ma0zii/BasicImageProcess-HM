@@ -2,7 +2,6 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as pyplot
 
-
 def darkchannel():
   for i in range(0,rows-1):
     for j in range(0,cols-1):
@@ -46,6 +45,7 @@ def guided_filter():
   mean_a = cv.blur(a, (r, r))  # 对a、b进行均值平滑
   mean_b = cv.blur(b, (r, r))
   q = mean_a*img_arr + mean_b
+
   return q
 
 
