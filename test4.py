@@ -1,24 +1,18 @@
-import copy
-
-import cv2 as cv
+import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import math
 
 def plt_imshow(m):
+    # m = cv2.cvtColor(m, cv2.COLOR_BGR2RGB)
     plt.imshow(m)
     plt.axis("off")
     plt.show()
 
-def maxP(m):
-    a = -1
-    for i in range(m.shape[0]):
-        for j in range(m.shape[1]):
-            for k in range(m.shape[2]):
-                if m[i][j][k] > a:
-                    a = m[i][j][k]
+def maxPixel(m):
+    m = np.array(m)
+    a = np.max(m)
     return a
-
 
 def darkChannel():
     for i in range(rows):
@@ -30,33 +24,41 @@ def darkChannel():
 kenlRatio = 0.01
 minAtomsLight = 240
 
-img_name = "image_work2/2.jpg"
-img = cv.imread(img_name) # 读取图片
-cv.imshow("original", img)
+img_name = "image_work2/7.jpg"
+img = cv2.imread(img_name) # 读取图片
+cv2.imshow("original", img)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img_arr = np.array(img)
+
+
+plt_imshow(img)
 
 rows, cols, channels = img.shape # 行，列，通道数
 dc = img
 
+plt_imshow(dc)
 darkChannel() # 暗通道
 plt_imshow(dc)
 
 krnlsz = max(3, rows * kenlRatio, cols * kenlRatio)  # 滤波窗口尺寸
-dc2 = cv.erode(dc, np.ones((math.ceil(krnlsz), math.ceil(krnlsz)))) # 最小值滤波
+dc2 = cv2.erode(dc, np.ones((math.ceil(krnlsz), math.ceil(krnlsz)))) # 最小值滤波
 plt_imshow(dc2)
 
 '''归一化'''
 t = 255 - dc2
-t_d = np.array(t)
+t_d = np.array(t) / 255
 t_d = sum(sum(t_d)/(rows * cols))
 t_d = sum(t_d) / 3
+print(t_d)
 
 d = np.array(dc2)
-A = min(minAtomsLight, maxP(d))
+A = min(minAtomsLight, maxPixel(d))
+
 
 J = np.empty([rows, cols, channels], dtype=int)
 plt_imshow(img)
 for i in range(3):
-    J[:, :, i] = (img[:, :, i] - (1 - t_d) * A) / t_d
+    J[:, :, i] = (img_arr[:, :, i] - (1 - t_d) * A) / t_d
 plt_imshow(J)
 
 

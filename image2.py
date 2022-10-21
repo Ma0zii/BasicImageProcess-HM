@@ -2,6 +2,13 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as pyplot
 
+
+def plt_imshow(m):
+  pyplot.imshow(m)
+  pyplot.axis("off")
+  pyplot.show()
+
+
 def darkchannel():
   for i in range(0,rows-1):
     for j in range(0,cols-1):
@@ -61,29 +68,24 @@ def select_bright(data,V):
   mid = order[index]
   A = 0
   img_hsv = cv.cvtColor(img_copy,cv.COLOR_RGB2HLS)
+  plt_imshow(img_hsv)
   for i in range(0,rows):
     for j in range(0,cols):
       if data[i][j][0]>mid and img_hsv[i][j][1]>A:
         A = img_hsv[i][j][1]
+        print(A)
   V = V * w
   print(V)
   t = 1 - V/A
   t = np.maximum(t,t0)
   return t,A
 
-# def img_repair():
-#   J = np.zeros(img_arr.shape)
-#   for i in range(0,rows):
-#     for j in range(0,cols):
-#       for c in range(0,channels):
-#         J[i][j][c] = (img_arr[i][j][c]-A/255.0)/t[i][j][c]+A/255.0
-#   return J
 
 r = 75  # kernel
 eps = 0.001
 w = 0.95
 t0 = 0.10
-img = cv.imread("image_work2/1.jpg")
+img = cv.imread("image_work2/7.jpg")
 cv.imshow("original", img)
 img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 img_copy = img
@@ -97,9 +99,7 @@ min_filter()
 V = guided_filter()
 size = rows * cols
 t, A = select_bright(data, V)
-pyplot.imshow(min_data)
-pyplot.axis("off")
-pyplot.show()
+
 
 def repair():
   J = np.zeros(img_arr.shape)
@@ -110,9 +110,7 @@ def repair():
         J[i][j][c] = (img_arr[i][j][c]-A/255.0)/t[i][j][c]+A/255.0
   return J
 J = repair()
-pyplot.imshow(J)
-pyplot.axis("off")
-pyplot.show()
+plt_imshow(J)
 
 cv.waitKey(0)
 cv.destroyAllWindows()
