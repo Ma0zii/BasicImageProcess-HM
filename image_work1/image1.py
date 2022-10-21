@@ -5,7 +5,7 @@ import cv2
 # image_work1/image_test.jpeg
 
 def testChangeRGB():
-    a = np.array(Image.open('image_work1/image_test.jpeg'))
+    a = np.array(Image.open('image_test.jpeg'))
     imgold = cv2.imread("image_work1/image_test.jpeg")
     # b = [255, 255, 255] - a
     b = [255, 255, 255] - a
@@ -22,7 +22,7 @@ def testChangeRGB():
 def testScal():
     # -*- coding: UTF-8 -*-
     # 读取图像
-    im = Image.open("image_work1/image_test.jpeg")
+    im = Image.open("image_test.jpeg")
     im.show()
     # 原图像缩放为128x128
     im_resized = im.resize((128, 128))
@@ -33,7 +33,7 @@ def testRotate():
     # -*- coding: UTF-8 -*-
     from PIL import Image
     # 读取图像
-    im = Image.open("image_work1/image_test.jpeg")
+    im = Image.open("image_test.jpeg")
     im.show()
     # 指定逆时针旋转的角度
     im_rotate = im.rotate(45)
@@ -41,7 +41,7 @@ def testRotate():
 
 def testTranspose():
     # 读取图像
-    im = Image.open("image_work1/image_test.jpeg")
+    im = Image.open("image_test.jpeg")
     out = im.transpose(Image.FLIP_LEFT_RIGHT)
     out = im.transpose(Image.FLIP_TOP_BOTTOM)
     out = im.transpose(Image.ROTATE_90)
@@ -55,7 +55,7 @@ def testRonaldo():
     from PIL import Image
     import numpy as np
 
-    a = np.asarray(Image.open('image_work1/image_test.jpeg').convert('L')).astype('float')
+    a = np.asarray(Image.open('image_test.jpeg').convert('L')).astype('float')
 
     depth = 10.  # (0-100)
     grad = np.gradient(a)  # 取图像灰度的梯度值
