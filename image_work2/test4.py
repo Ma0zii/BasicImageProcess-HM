@@ -24,15 +24,18 @@ def darkChannel():
 kenlRatio = 0.01
 minAtomsLight = 240
 
-img_name = "image_work2/9.jpg"
+img_name = "image_work2/7.jpg"
+
 img = cv2.imread(img_name) # 读取图片
 cv2.imshow("original", img)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 img_arr = np.array(img)
 
+
 rows, cols, channels = img.shape # 行，列，通道数
 dc = img
 
+plt_imshow(dc)
 darkChannel() # 暗通道
 
 krnlsz = max(3, rows * kenlRatio, cols * kenlRatio)  # 滤波窗口尺寸

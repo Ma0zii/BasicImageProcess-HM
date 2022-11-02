@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+
 def plt_imshow(m):
     # m = cv2.cvtColor(m, cv2.COLOR_BGR2RGB)
     plt.imshow(m)
@@ -53,8 +54,8 @@ t0 = 0.1
 winRatio = 0.01
 minAtomsLight = 240
 
-file = open(r"image_work2/1.txt", "a", encoding='utf-8')
-img_name = "image_work2/9.jpg"
+file = open(r"1.txt", "a", encoding='utf-8')
+img_name = "image_work2/8.jpg"
 img = cv2.imread(img_name) # 读取图片
 cv2.imshow("original", img)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # 转化通道
