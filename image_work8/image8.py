@@ -36,8 +36,6 @@ def watershed_demo():
     src[markers==-1] = [0, 0, 255]#标记
     cv.imshow("result", src)
 
-
-
 src = cv.imread("dog1.jpg")
 cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
 cv.imshow("input image", src)
